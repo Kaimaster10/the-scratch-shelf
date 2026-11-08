@@ -212,7 +212,7 @@
     <button id="import-btn" class="btn" type="button">Import</button>
     <input id="import-file" type="file" accept=".json,application/json" class="hidden" aria-label="Choose a backup file to import">
     <button id="goodreads-btn" class="btn" type="button">Goodreads</button>
-    <input id="goodreads-file" type="file" accept=".csv,text/csv" class="hidden" aria-label="Choose a Goodreads export file">
+    <input id="goodreads-file" type="file" class="hidden" aria-label="Choose a Goodreads export file">
     <button id="theme-btn" class="btn" type="button" aria-pressed="false"><span id="theme-label">Dark mode</span></button>
   </div>
 </header>
@@ -347,7 +347,7 @@
   <div class="p-5">
     <h2 id="modal-title" class="serif text-xl font-semibold"></h2>
     <div id="modal-body" class="text-sm muted mt-2 space-y-2"></div>
-    <div id="modal-actions" class="flex justify-end gap-2 mt-4"></div>
+    <div id="modal-actions" class="flex flex-wrap justify-end gap-2 mt-4"></div>
   </div>
 </dialog>
 <dialog id="sheet" aria-label="Book details">
@@ -2198,9 +2198,9 @@ function applyGoodreads(plan) {
 
 function handleGoodreadsText(text) {
   if (notesTimer) flushNotes();
-  if (!text.trim()) return importFailed(['The file is empty.']);
+  if (!text.trim()) return importFailed(['The export is empty.']);
   const rows = parseCSV(text);
-  if (!rows) return importFailed(['This file is damaged and could not be read as a spreadsheet. Try downloading it from Goodreads again.']);
+  if (!rows) return importFailed(['This export looks cut off or damaged. Get it from Goodreads again and make sure you copy all of it.']);
   if (!rows.length) return importFailed(['The file is empty.']);
   const plan = planGoodreads(rows);
   if (plan.errors.length) return importFailed(plan.errors);
@@ -2210,13 +2210,26 @@ function handleGoodreadsText(text) {
 function wireGoodreads() {
   $('goodreads-btn').addEventListener('click', () => {
     showModal('Import from Goodreads',
-      '<p>Goodreads doesn’t let apps connect directly, so this works from a file you download:</p>' +
+      '<p>Goodreads doesn’t let apps connect directly, so you bring your library over in three steps:</p>' +
       '<ol class="list-decimal pl-5 space-y-1">' +
         '<li>Open <a class="underline" href="https://www.goodreads.com/review/import" target="_blank" rel="noopener">your Goodreads export page</a> (My Books, then Import and export).</li>' +
         '<li>Click <strong>Export Library</strong> and wait for the download link.</li>' +
-        '<li>Download the file, then choose it here.</li>' +
-      '</ol><p>You’ll see what will change before anything is saved. Your file stays on this computer.</p>',
-      [{ label: 'Cancel' }, { label: 'Choose file', primary: true, run: () => $('goodreads-file').click() }]);
+        '<li>When the export link appears, bring it here in one of two ways.</li>' +
+      '</ol>' +
+      '<p><strong style="color:var(--ink)">On a computer:</strong> download the file, then use Choose file.</p>' +
+      '<p><strong style="color:var(--ink)">On a phone:</strong> tap the link so the text opens, press and hold on the text, choose Select All, copy it, and paste it here.</p>' +
+      '<label for="gr-paste" class="eyebrow block">Paste your export</label>' +
+      '<textarea id="gr-paste" class="field" rows="3" placeholder="Book Id,Title,Author,…" autocomplete="off" spellcheck="false"></textarea>' +
+      '<p>You’ll see what will change before anything is saved. Your export stays on this device.</p>',
+      [
+        { label: 'Cancel' },
+        { label: 'Choose file', run: () => $('goodreads-file').click() },
+        { label: 'Use pasted text', primary: true, run: () => {
+          const pasted = $('gr-paste').value;
+          if (!pasted.trim()) return importFailed(['Nothing was pasted. Copy the text of your Goodreads export and paste it into the box.']);
+          handleGoodreadsText(pasted);
+        } },
+      ]);
   });
   $('goodreads-file').addEventListener('change', ev => {
     const file = ev.target.files[0];
