@@ -182,6 +182,29 @@
   .friend-book { display: flex; justify-content: space-between; align-items: baseline; gap: .75rem; padding: .3rem 0; font-size: .875rem; }
   .friend-book .link-btn { white-space: nowrap; }
 
+
+  :root { --plank: #a98255; --plank-dark: #7d5c38; --shelf-back: #e6d9bf; --spine-ink: #f4ead6; --spine-tool: rgb(233 200 120 / .75); }
+  html.dark { --plank: #5a3f29; --plank-dark: #38261a; --shelf-back: #15100c; }
+  @media (max-width: 767px) { #shelf-controls { display: none; } #shelf-controls.show { display: flex; } }
+  .shelf-group { display: flex; flex-direction: column; gap: .35rem; min-width: 0; }
+  .shelf-head { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: .25rem .75rem; margin-bottom: .4rem; }
+  .shelf-arrow { width: 30px; height: 30px; font-size: 1.1rem; line-height: 1; color: var(--ink-2); background: var(--surface); border: 1px solid var(--line); border-radius: 6px; cursor: pointer; }
+  .shelf-arrow:hover { border-color: var(--gold); color: var(--ink); }
+  @media (hover: none) { .shelf-arrow { display: none; } }
+  .shelf-row { display: flex; align-items: flex-end; gap: 2px; min-height: 182px; padding: 14px 14px 0; overflow-x: auto; background: var(--shelf-back); border-bottom: 11px solid var(--plank); border-radius: 3px 3px 0 0; box-shadow: inset 0 10px 14px -10px rgb(30 18 8 / .4), 0 3px 0 var(--plank-dark); scrollbar-width: thin; }
+  .spine { position: relative; flex: none; width: var(--w); height: var(--h); padding: 0; border: 0; color: var(--spine-ink); border-radius: 2px 2px 0 0; cursor: pointer; overflow: hidden; box-shadow: inset 2px 0 3px rgb(255 255 255 / .12), inset -3px 0 4px rgb(0 0 0 / .32); transition: transform .15s ease; }
+  .spine:hover, .spine:focus-visible { transform: translateY(-7px); }
+  .spine:focus-visible { outline-offset: -2px; outline-color: var(--spine-ink); }
+  .spine::before, .spine::after { content: ""; position: absolute; left: 0; right: 0; height: 2px; background: var(--spine-tool); }
+  .spine::before { top: 9px; }
+  .spine::after { bottom: 9px; }
+  .spine.band-1::before { box-shadow: 0 5px 0 var(--spine-tool); }
+  .spine.band-2::after { box-shadow: 0 -5px 0 var(--spine-tool); }
+  .spine.is-read { opacity: .42; }
+  .spine.is-want { box-shadow: inset 2px 0 3px rgb(255 255 255 / .12), inset -3px 0 4px rgb(0 0 0 / .32), inset 0 4px 0 var(--gold-mark); }
+  .spine-title { position: absolute; top: 18px; bottom: 18px; left: 0; right: 0; display: flex; align-items: center; justify-content: flex-start; writing-mode: vertical-rl; font-family: var(--serif); font-size: 11.5px; line-height: 1.05; white-space: nowrap; overflow: hidden; }
+  @media (prefers-reduced-motion: reduce) { .spine:hover, .spine:focus-visible { transform: none; } }
+
   @media (max-width: 1023px) {
     #filters { display: none; }
     #filters.show { display: block; }
@@ -191,7 +214,7 @@
     .card:hover, .star:hover, .btn:active { transform: none; }
   }
 </style>
-<style>*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.visible{visibility:visible}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.mx-auto{margin-left:auto;margin-right:auto}.-mt-1{margin-top:-.25rem}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-3{margin-bottom:.75rem}.ml-auto{margin-left:auto}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-auto{margin-top:auto}.block{display:block}.inline{display:inline}.flex{display:flex}.grid{display:grid}.hidden{display:none}.min-h-screen{min-height:100vh}.w-full{width:100%}.min-w-0{min-width:0}.max-w-\[1200px\]{max-width:1200px}.max-w-\[1500px\]{max-width:1500px}.flex-1{flex:1 1 0%}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.resize{resize:both}.list-decimal{list-style-type:decimal}.list-disc{list-style-type:disc}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-cols-\[1fr_auto\]{grid-template-columns:1fr auto}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.items-baseline{align-items:baseline}.justify-end{justify-content:flex-end}.justify-between{justify-content:space-between}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-5{gap:1.25rem}.gap-x-2{-moz-column-gap:.5rem;column-gap:.5rem}.gap-x-3{-moz-column-gap:.75rem;column-gap:.75rem}.gap-x-6{-moz-column-gap:1.5rem;column-gap:1.5rem}.gap-y-1{row-gap:.25rem}.gap-y-2{row-gap:.5rem}.gap-y-2\.5{row-gap:.625rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.whitespace-nowrap{white-space:nowrap}.border{border-width:1px}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-8{padding:2rem}.px-4{padding-left:1rem;padding-right:1rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.pb-10{padding-bottom:2.5rem}.pb-4{padding-bottom:1rem}.pb-8{padding-bottom:2rem}.pl-5{padding-left:1.25rem}.pt-1{padding-top:.25rem}.pt-2{padding-top:.5rem}.pt-3{padding-top:.75rem}.pt-6{padding-top:1.5rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.tabular-nums{--tw-numeric-spacing:tabular-nums;font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)}.leading-relaxed{line-height:1.625}.leading-tight{line-height:1.25}.tracking-tight{letter-spacing:-.025em}.underline{text-decoration-line:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.outline{outline-style:solid}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}@media (min-width:640px){.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}}@media (min-width:768px){.md\:block{display:block}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-\[minmax\(0\2c 1fr\)_minmax\(0\2c 2fr\)\]{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}}@media (min-width:1024px){.lg\:sticky{position:sticky}.lg\:top-4{top:1rem}.lg\:hidden{display:none}.lg\:max-h-\[calc\(100vh-2rem\)\]{max-height:calc(100vh - 2rem)}.lg\:grid-cols-\[290px_minmax\(0\2c 1fr\)\]{grid-template-columns:290px minmax(0,1fr)}.lg\:overflow-y-auto{overflow-y:auto}}@media (min-width:1280px){.xl\:grid-cols-\[minmax\(0\2c 1\.25fr\)_minmax\(0\2c 1fr\)\]{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}}@media (min-width:1536px){.\32xl\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}</style>
+<style>*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.visible{visibility:visible}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.mx-auto{margin-left:auto;margin-right:auto}.-mt-1{margin-top:-.25rem}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-3{margin-bottom:.75rem}.mb-5{margin-bottom:1.25rem}.ml-auto{margin-left:auto}.mr-2{margin-right:.5rem}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-auto{margin-top:auto}.block{display:block}.inline{display:inline}.flex{display:flex}.grid{display:grid}.hidden{display:none}.min-h-screen{min-height:100vh}.w-full{width:100%}.min-w-0{min-width:0}.max-w-\[1200px\]{max-width:1200px}.max-w-\[1500px\]{max-width:1500px}.flex-1{flex:1 1 0%}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.resize{resize:both}.list-decimal{list-style-type:decimal}.list-disc{list-style-type:disc}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-cols-\[1fr_auto\]{grid-template-columns:1fr auto}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.items-baseline{align-items:baseline}.justify-end{justify-content:flex-end}.justify-between{justify-content:space-between}.gap-1{gap:.25rem}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-5{gap:1.25rem}.gap-x-2{-moz-column-gap:.5rem;column-gap:.5rem}.gap-x-3{-moz-column-gap:.75rem;column-gap:.75rem}.gap-x-6{-moz-column-gap:1.5rem;column-gap:1.5rem}.gap-x-7{-moz-column-gap:1.75rem;column-gap:1.75rem}.gap-y-1{row-gap:.25rem}.gap-y-2{row-gap:.5rem}.gap-y-2\.5{row-gap:.625rem}.gap-y-3{row-gap:.75rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.whitespace-nowrap{white-space:nowrap}.border{border-width:1px}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-8{padding:2rem}.px-4{padding-left:1rem;padding-right:1rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.pb-10{padding-bottom:2.5rem}.pb-4{padding-bottom:1rem}.pb-8{padding-bottom:2rem}.pl-5{padding-left:1.25rem}.pt-1{padding-top:.25rem}.pt-2{padding-top:.5rem}.pt-3{padding-top:.75rem}.pt-6{padding-top:1.5rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.tabular-nums{--tw-numeric-spacing:tabular-nums;font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)}.leading-relaxed{line-height:1.625}.leading-tight{line-height:1.25}.tracking-tight{letter-spacing:-.025em}.underline{text-decoration-line:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.outline{outline-style:solid}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}@media (min-width:640px){.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}}@media (min-width:768px){.md\:block{display:block}.md\:hidden{display:none}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-\[minmax\(0\2c 1fr\)_minmax\(0\2c 2fr\)\]{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}}@media (min-width:1024px){.lg\:sticky{position:sticky}.lg\:top-4{top:1rem}.lg\:hidden{display:none}.lg\:max-h-\[calc\(100vh-2rem\)\]{max-height:calc(100vh - 2rem)}.lg\:grid-cols-\[290px_minmax\(0\2c 1fr\)\]{grid-template-columns:290px minmax(0,1fr)}.lg\:overflow-y-auto{overflow-y:auto}}@media (min-width:1280px){.xl\:grid-cols-\[minmax\(0\2c 1\.25fr\)_minmax\(0\2c 1fr\)\]{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}}@media (min-width:1536px){.\32xl\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}</style>
 </head>
 <body class="min-h-screen antialiased">
 
@@ -205,6 +228,7 @@
   <div class="flex flex-wrap items-center gap-2">
     <div class="seg" role="group" aria-label="View">
       <button id="view-poster" type="button">Poster</button>
+      <button id="view-shelves" type="button">Shelves</button>
       <button id="view-list" type="button">List</button>
       <button id="view-friends" type="button">Friends</button>
     </div>
@@ -230,6 +254,26 @@
   </div>
   <div id="poster-scroll" class="px-4 sm:px-6"><div id="poster" class="poster"></div></div>
   <p class="px-4 sm:px-6 mt-3 text-xs faint">Oldest at the top left, newest at the bottom right. Cover images from Open Library; editions vary. Books without an image get a plain cloth cover. Based on the list in 1001 Books You Must Read Before You Die, edited by Peter Boxall (2018 edition). The Scratch Shelf is an unofficial fan project, not affiliated with the book, its publisher, Goodreads or Open Library. Your progress stays in this browser; use Export to keep a backup.</p>
+</section>
+
+<section id="shelves-view" class="hidden max-w-[1500px] mx-auto px-4 sm:px-6 pb-10" aria-label="Shelves">
+  <div class="panel p-5 mb-5">
+    <div class="flex flex-wrap items-start justify-between gap-3">
+      <div class="min-w-0">
+        <p id="shelf-summary" class="serif text-2xl"></p>
+        <p id="shelf-time" class="text-sm muted mt-0.5"></p>
+      </div>
+      <button id="shelf-surprise" class="btn btn-primary" type="button">Pick one for me</button>
+    </div>
+    <button id="shelf-filters" class="btn w-full mt-3 md:hidden" type="button" aria-expanded="false" aria-controls="shelf-controls">Filter and arrange</button>
+    <div id="shelf-controls" class="flex flex-wrap gap-x-7 gap-y-3 mt-4"></div>
+  </div>
+  <div id="shelves" class="space-y-5"></div>
+  <div id="shelves-empty" class="hidden panel p-8 text-center">
+    <p class="serif text-lg">No books fit those choices.</p>
+    <button id="shelves-reset" class="btn mt-3" type="button">Show everything I haven’t read</button>
+  </div>
+  <p class="text-xs faint mt-4">Thicker spines are longer books. Tap a spine to scratch it, rate it or add it to Want to Read. Page counts are approximate.</p>
 </section>
 
 <section id="friends-view" class="hidden max-w-[1200px] mx-auto px-4 sm:px-6 pb-10 space-y-5" aria-label="Friends">
@@ -1581,6 +1625,7 @@ function syncBook(id) {
   renderDashboard();
   renderFilterCounts();
   syncPosterBook(id);
+  if (prefs.view === 'shelves') renderShelves();
 }
 
 /* ---------- Filtering and sorting ---------- */
@@ -1816,7 +1861,7 @@ function renderFilterCounts() {
     counts.era[b.era] = (counts.era[b.era] || 0) + 1;
     counts.genre[b.genre] = (counts.genre[b.genre] || 0) + 1;
   }
-  document.querySelectorAll('.chip').forEach(c => {
+  document.querySelectorAll('aside .chip').forEach(c => {
     c.querySelector('[data-count]').textContent = fmt(counts[c.dataset.group][c.dataset.value] || 0);
     c.setAttribute('aria-pressed', filters[c.dataset.group].has(c.dataset.value));
   });
@@ -2372,11 +2417,14 @@ function setView(view) {
   $('poster-view').classList.toggle('hidden', !poster);
   $('list-view').classList.toggle('hidden', view !== 'list');
   $('friends-view').classList.toggle('hidden', view !== 'friends');
+  $('shelves-view').classList.toggle('hidden', view !== 'shelves');
   $('view-poster').setAttribute('aria-pressed', poster);
   $('view-list').setAttribute('aria-pressed', view === 'list');
   $('view-friends').setAttribute('aria-pressed', view === 'friends');
+  $('view-shelves').setAttribute('aria-pressed', view === 'shelves');
   if (poster) setZoom(prefs.zoom);
   if (view === 'friends') renderFriends();
+  if (view === 'shelves') renderShelves();
 }
 
 function applyPosterSearch(scroll) {
@@ -3017,6 +3065,155 @@ function wireFriends() {
   window.addEventListener('hashchange', handleFriendHash);
 }
 
+/* ---------- Shelves: what's left to read ---------- */
+
+const SHELF_LENGTHS = [
+  { id: 'short', label: 'Under 200 pages', test: p => p < 200 },
+  { id: 'medium', label: '200–399 pages', test: p => p >= 200 && p < 400 },
+  { id: 'long', label: '400–699 pages', test: p => p >= 400 && p < 700 },
+  { id: 'epic', label: '700 pages or more', test: p => p >= 700 },
+];
+const SHELF_CHOICES = {
+  show: [['unread', 'Not read yet'], ['want', 'Want to Read'], ['friends', 'Friends have read'], ['all', 'Everything']],
+  group: [['genre', 'Genre'], ['era', 'Era'], ['length', 'Length']],
+  length: [['any', 'Any']].concat(SHELF_LENGTHS.map(l => [l.id, l.label.replace(' pages', '')])),
+  era: [['any', 'Any']].concat(ERAS.map(e => [e, e])),
+  order: [['year', 'Oldest first'], ['short', 'Shortest first'], ['title', 'A–Z']],
+};
+const SHELF_LABELS = { show: 'Show', group: 'Arrange by', length: 'Length', era: 'Era', order: 'Order' };
+const shelfState = Object.assign({ show: 'unread', group: 'genre', length: 'any', era: 'any', order: 'year' }, prefs.shelves || {});
+Object.keys(SHELF_CHOICES).forEach(key => {
+  if (!SHELF_CHOICES[key].some(([value]) => value === shelfState[key])) shelfState[key] = SHELF_CHOICES[key][0][0];
+});
+let shelfVisible = [];
+
+function friendsReadIds() {
+  const ids = new Set();
+  Object.values(social.friends).forEach(f => bookIdsFromBits(f.bits).forEach(id => ids.add(id)));
+  return ids;
+}
+function shelfBooks() {
+  const friendIds = shelfState.show === 'friends' ? friendsReadIds() : null;
+  const length = SHELF_LENGTHS.find(l => l.id === shelfState.length);
+  const list = BOOKS.filter(b => {
+    const status = statusOf(b.id);
+    if (shelfState.show === 'unread' && status === 'read') return false;
+    if (shelfState.show === 'want' && status !== 'want') return false;
+    if (friendIds && (!friendIds.has(b.id) || status === 'read')) return false;
+    return (!length || length.test(b.pages)) && (shelfState.era === 'any' || b.era === shelfState.era);
+  });
+  const order = {
+    year: (a, b) => a.year - b.year,
+    short: (a, b) => a.pages - b.pages,
+    title: (a, b) => collator.compare(a.titleKey, b.titleKey),
+  }[shelfState.order];
+  return list.sort((a, b) => order(a, b) || collator.compare(a.titleKey, b.titleKey));
+}
+function shelfGroups() {
+  if (shelfState.group === 'era') return ERAS.map(e => ({ key: e, label: e, match: b => b.era === e }));
+  if (shelfState.group === 'length') return SHELF_LENGTHS.map(l => ({ key: l.id, label: l.label, match: b => l.test(b.pages) }));
+  return GENRES.map(g => ({ key: g, label: g, match: b => b.genre === g }));
+}
+
+function spineHTML(b) {
+  const n = Number(b.id);
+  const width = Math.round(Math.min(58, Math.max(23, 16 + b.pages / 26)));
+  const height = 128 + (n * 7 % 5) * 9;
+  const status = statusOf(b.id);
+  return '<button type="button" class="spine band-' + (n % 3) + (status === 'read' ? ' is-read' : '') + (status === 'want' ? ' is-want' : '') + '" data-book="' + b.id + '"' +
+    ' style="--w:' + width + 'px;--h:' + height + 'px;background-color:' + CLOTH[n % CLOTH.length] + '"' +
+    ' title="' + esc(b.title + ', ' + b.author + ' (' + yearLabel(b.year) + '), about ' + fmt(b.pages) + ' pages') + '"' +
+    ' aria-label="' + esc(b.title + ' by ' + b.author + ', about ' + fmt(b.pages) + ' pages. ' + STATUS_LABEL[status]) + '">' +
+    '<span class="spine-title">' + esc(b.title) + '</span></button>';
+}
+
+function timeToRead(pages) {
+  const days = pages / 30;
+  if (days < 14) return Math.max(1, Math.round(days)) + (Math.round(days) <= 1 ? ' day' : ' days');
+  if (days < 365) return Math.round(days / 30.4) <= 1 ? 'about a month' : 'about ' + Math.round(days / 30.4) + ' months';
+  return Math.round(days / 365) <= 1 ? 'about a year' : 'about ' + Math.round(days / 365) + ' years';
+}
+
+function renderShelves() {
+  if (!$('shelves')) return;
+  const scroll = {};
+  document.querySelectorAll('#shelves .shelf-row').forEach(r => { scroll[r.dataset.key] = r.scrollLeft; });
+  shelfVisible = shelfBooks();
+  const pages = shelfVisible.reduce((sum, b) => sum + b.pages, 0);
+  $('shelf-summary').textContent = shelfVisible.length
+    ? fmt(shelfVisible.length) + (shelfVisible.length === 1 ? ' book' : ' books') + ', roughly ' + fmt(pages) + ' pages.'
+    : 'Nothing on these shelves.';
+  $('shelf-time').textContent = shelfVisible.length ? 'At 30 pages a day, that’s ' + timeToRead(pages) + ' of reading.' : '';
+  $('shelf-surprise').classList.toggle('hidden', !shelfVisible.length);
+
+  $('shelf-controls').innerHTML = Object.keys(SHELF_CHOICES).map(key => {
+    const choices = key === 'show' && !Object.keys(social.friends).length ? SHELF_CHOICES[key].filter(([v]) => v !== 'friends') : SHELF_CHOICES[key];
+    return '<div class="shelf-group"><span class="eyebrow">' + SHELF_LABELS[key] + '</span><div class="flex flex-wrap gap-1.5" role="group" aria-label="' + SHELF_LABELS[key] + '">' +
+      choices.map(([value, label]) => '<button type="button" class="chip" data-shelf="' + key + '" data-value="' + esc(value) + '" aria-pressed="' + (shelfState[key] === value) + '">' + esc(label) + '</button>').join('') +
+      '</div></div>';
+  }).join('');
+
+  $('shelves').innerHTML = shelfGroups().map(group => {
+    const books = shelfVisible.filter(group.match);
+    if (!books.length) return '';
+    const total = BOOKS.filter(group.match);
+    const read = total.filter(b => statusOf(b.id) === 'read').length;
+    const groupPages = books.reduce((sum, b) => sum + b.pages, 0);
+    return '<section class="shelf" aria-label="' + esc(group.label) + '">' +
+      '<div class="shelf-head"><div class="min-w-0"><h3 class="serif text-lg font-semibold">' + esc(group.label) + '</h3>' +
+        '<p class="text-xs muted tabular-nums">' + fmt(books.length) + (books.length === 1 ? ' book' : ' books') + ' · about ' + fmt(groupPages) + ' pages · ' + fmt(read) + ' of ' + fmt(total.length) + ' read</p></div>' +
+        '<div class="flex items-center gap-1">' +
+          '<button type="button" class="link-btn mr-2" data-pick="' + esc(group.key) + '">Surprise me</button>' +
+          '<button type="button" class="shelf-arrow" data-scroll="-1" aria-label="Scroll ' + esc(group.label) + ' left">‹</button>' +
+          '<button type="button" class="shelf-arrow" data-scroll="1" aria-label="Scroll ' + esc(group.label) + ' right">›</button>' +
+        '</div></div>' +
+      '<div class="shelf-row" data-key="' + esc(group.key) + '">' + books.map(spineHTML).join('') + '</div></section>';
+  }).join('');
+  $('shelves-empty').classList.toggle('hidden', shelfVisible.length > 0);
+  document.querySelectorAll('#shelves .shelf-row').forEach(r => { if (scroll[r.dataset.key]) r.scrollLeft = scroll[r.dataset.key]; });
+}
+
+function pickFrom(books) {
+  if (books.length) openSheet(books[Math.floor(Math.random() * books.length)].id);
+}
+
+function wireShelves() {
+  $('view-shelves').addEventListener('click', () => setView('shelves'));
+  $('shelf-controls').addEventListener('click', ev => {
+    const chip = ev.target.closest('[data-shelf]');
+    if (!chip) return;
+    shelfState[chip.dataset.shelf] = chip.dataset.value;
+    prefs.shelves = shelfState;
+    savePrefs();
+    document.querySelectorAll('#shelves .shelf-row').forEach(r => { r.scrollLeft = 0; });
+    renderShelves();
+  });
+  $('shelf-filters').addEventListener('click', ev => {
+    ev.currentTarget.setAttribute('aria-expanded', $('shelf-controls').classList.toggle('show'));
+  });
+  $('shelf-surprise').addEventListener('click', () => pickFrom(shelfVisible));
+  $('shelves-reset').addEventListener('click', () => {
+    Object.assign(shelfState, { show: 'unread', length: 'any', era: 'any' });
+    prefs.shelves = shelfState;
+    savePrefs();
+    renderShelves();
+  });
+  $('shelves').addEventListener('click', ev => {
+    const spine = ev.target.closest('[data-book]');
+    const pick = ev.target.closest('[data-pick]');
+    const arrow = ev.target.closest('[data-scroll]');
+    if (spine) openSheet(spine.dataset.book);
+    if (pick) {
+      const group = shelfGroups().find(g => g.key === pick.dataset.pick);
+      pickFrom(shelfVisible.filter(group.match));
+    }
+    if (arrow) {
+      const row = arrow.closest('.shelf').querySelector('.shelf-row');
+      row.scrollBy({ left: Number(arrow.dataset.scroll) * row.clientWidth * 0.8, behavior: reducedMotion() ? 'auto' : 'smooth' });
+    }
+  });
+}
+
 /* ---------- Theme and wiring ---------- */
 
 function renderTheme() {
@@ -3029,6 +3226,7 @@ function renderAll() {
   renderPoster();
   renderDashboard();
   if (prefs.view === 'friends') renderFriends();
+  if (prefs.view === 'shelves') renderShelves();
   renderFilterCounts();
   applyView();
   pickNext($('next-era').value, $('next-genre').value);
@@ -3051,8 +3249,9 @@ function init() {
   wireGoodreads();
   wirePoster();
   wireFriends();
+  wireShelves();
   renderAll();
-  setView(['list', 'friends'].includes(prefs.view) ? prefs.view : 'poster');
+  setView(['list', 'friends', 'shelves'].includes(prefs.view) ? prefs.view : 'poster');
   handleFriendHash();
   window.addEventListener('pagehide', () => { if (notesTimer) flushNotes(); });
   window.addEventListener('beforeunload', () => { if (notesTimer) flushNotes(); });
