@@ -2001,8 +2001,8 @@ const GR_ALIASES = {
   1073: ['The Club Dumas'], 1114: ['Sostiene Pereira', 'Pereira Maintains'], 1119: ['Extension du domaine de la lutte'], 1170: ['Atomised', 'The Elementary Particles'],
 };
 
-// Returns an array of rows, or null when a quoted field is never closed.
-function parseCSV(text) {
+// Returns an array of rows. If a quoted field is never closed, the unfinished row is dropped and rows.cutOff is set.
+function parseCSV(text, delimiter = ',') {
   const rows = [];
   let row = [], field = '', quoted = false;
   const src = text.replace(/^﻿/, '');
@@ -2012,8 +2012,8 @@ function parseCSV(text) {
       if (c !== '"') field += c;
       else if (src[i + 1] === '"') { field += '"'; i++; }
       else quoted = false;
-    } else if (c === '"') quoted = true;
-    else if (c === ',') { row.push(field); field = ''; }
+    } else if (c === '"' && delimiter === ',') quoted = true;
+    else if (c === delimiter) { row.push(field); field = ''; }
     else if (c === '\n' || c === '\r') {
       if (c === '\r' && src[i + 1] === '\n') i++;
       row.push(field); field = '';
@@ -2021,10 +2021,48 @@ function parseCSV(text) {
       row = [];
     } else field += c;
   }
-  if (quoted) return null;
+  if (quoted) { rows.cutOff = true; return rows; }
   row.push(field);
   if (row.some(Boolean)) rows.push(row);
   return rows;
+}
+
+// Phones can flatten a copied export onto one line, turning each row break into a space.
+function splitFlattenedRows(fields) {
+  const last = fields.findIndex(f => /^\s*owned copies\b/i.test(f));
+  if (last < 1 || fields.length <= last + 1) return null;
+  const width = last + 1;
+  const header = fields.slice(0, last).concat('Owned Copies');
+  const rows = [header];
+  let carry = fields[last].replace(/^\s*owned copies\s*/i, '');
+  for (let i = width; carry !== null && i < fields.length; i += width - 1) {
+    const row = [carry].concat(fields.slice(i, i + width - 2));
+    const boundary = fields[i + width - 2];
+    carry = null;
+    if (boundary !== undefined) {
+      const parts = boundary.trim().match(/^(\S*)\s+(\S+)$/);
+      row.push(parts ? parts[1] : boundary.trim());
+      if (parts) carry = parts[2];
+    }
+    rows.push(row);
+  }
+  return rows;
+}
+
+// Accepts the export however a phone hands it over: tabs, curly quotes, flattened lines, extra text around it.
+function readGoodreadsText(text) {
+  let src = text.replace(/^\uFEFF/, '').trim();
+  if (/^https?:\/\/\S+$/.test(src)) return { error: 'That’s the web address of your export, not the export itself. Open the link, then copy the text on the page that opens.' };
+  if (!src.includes('"') && /[“”]/.test(src)) src = src.replace(/[“”]/g, '"');
+  const start = src.search(/book\s+id[,\t ]/i);
+  if (start > 0) src = src.slice(start);
+  const firstLine = src.split(/\r?\n/, 1)[0];
+  const rows = parseCSV(src, /title\t+author/i.test(firstLine) ? '\t' : ',');
+  if (rows.length === 1) {
+    const split = splitFlattenedRows(rows[0]);
+    if (split) { split.cutOff = rows.cutOff; return { rows: split }; }
+  }
+  return { rows };
 }
 
 function titleKey(title) {
@@ -2171,6 +2209,7 @@ function showGoodreadsPlan(plan) {
       count('read') + ' read, ' + count('reading') + ' currently reading, ' + count('want') + ' want to read).</p>' +
     (plan.matched.size ? '<p><strong>' + added + '</strong> new to the tracker, <strong>' + updated + '</strong> will be updated, <strong>' + unchanged + '</strong> already up to date.</p>' : '') +
     '<p>This only adds to your data. Ratings, dates and notes you already have here are kept, and a book never moves backwards (Read stays Read).</p>' +
+    (plan.cutOff ? '<p style="color:var(--ink)">The end of your export looked cut off, so the last book was left out. Check the total above against Goodreads.</p>' : '') +
     (plan.otherShelves ? '<p>' + plan.otherShelves + (plan.otherShelves === 1 ? ' book on a custom Goodreads shelf was' : ' books on custom Goodreads shelves were') + ' left out.</p>' : '') +
     (plan.nearMisses.length
       ? '<p style="color:var(--ink)"><strong>Worth checking (' + plan.nearMisses.length + ').</strong> By authors on the list but not matched, possibly because of a different title. Choose the right book, or leave as skipped.</p>' +
@@ -2199,11 +2238,14 @@ function applyGoodreads(plan) {
 function handleGoodreadsText(text) {
   if (notesTimer) flushNotes();
   if (!text.trim()) return importFailed(['The export is empty.']);
-  const rows = parseCSV(text);
-  if (!rows) return importFailed(['This export looks cut off or damaged. Get it from Goodreads again and make sure you copy all of it.']);
-  if (!rows.length) return importFailed(['The file is empty.']);
+  const received = 'Received ' + fmt(text.length) + ' characters, starting with: ' + text.trim().slice(0, 60);
+  const read = readGoodreadsText(text);
+  if (read.error) return importFailed([read.error]);
+  const rows = read.rows;
+  if (!rows.length || (rows.cutOff && rows.length < 2)) return importFailed(['This export looks cut off or damaged. Get it from Goodreads again and make sure you copy all of it.', received]);
   const plan = planGoodreads(rows);
-  if (plan.errors.length) return importFailed(plan.errors);
+  if (plan.errors.length) return importFailed(plan.errors.concat(received));
+  plan.cutOff = !!rows.cutOff;
   showGoodreadsPlan(plan);
 }
 
