@@ -4,6 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The Scratch Shelf</title>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<meta name="theme-color" content="#1b1410">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Scratch Shelf">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="description" content="A scratch-off poster of 1,001 great books. Scratch away the foil on each one you finish to unveil its cover. Unofficial fan project.">
 <script>
   // Apply the saved theme before first paint so dark mode never flashes.
@@ -105,8 +112,8 @@
   .seg button:hover { color: var(--ink); }
   .seg button[aria-pressed="true"] { background: var(--gold-soft); color: var(--ink); font-weight: 600; }
 
-  :root { --mat: #ece1cb; --mat-line: #d3c3a4; }
-  html.dark { --mat: #120d09; --mat-line: #3a2d22; }
+  :root { --mat: #ece1cb; --mat-line: #d3c3a4; --gold-mark: #f2c94c; }
+  html.dark { --mat: #120d09; --mat-line: #3a2d22; --gold-mark: #f2c94c; }
   #poster-scroll { overflow: auto; }
   .poster { --tile-w: 40px; width: calc(var(--zoom, 1) * 100%); display: grid; grid-template-columns: repeat(33, minmax(0, 1fr)); gap: calc(var(--tile-w) * .09); padding: calc(var(--tile-w) * .9); background: var(--mat); border: 1px solid var(--mat-line); border-radius: 4px; box-shadow: var(--shadow); user-select: none; -webkit-user-select: none; transition: background-color .25s ease; }
   .era-0 { --f1: #8c5a38; --f2: #c79468; --f3: #6e4428; }
@@ -163,6 +170,18 @@
     .sheet-cover { max-width: 240px; margin: 0 auto; width: 100%; }
   }
 
+
+  .friend-row { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1rem; align-items: center; padding: .75rem 0; border-top: 1px solid var(--line); }
+  .friend-row:first-child { border-top: 0; }
+  .friend-row.is-me .bar-fill { background: var(--gold-ink); }
+  .tile.friend-tile { cursor: default; box-shadow: none; }
+  .tile.also-mine::after { content: ""; position: absolute; top: 0; right: 0; border-style: solid; border-width: 0 calc(var(--tile-w) * .34) calc(var(--tile-w) * .34) 0; border-color: transparent var(--gold-mark) transparent transparent; }
+  .friend-section { border-top: 1px solid var(--line); padding: .55rem 0; }
+  .friend-section summary { cursor: pointer; display: flex; gap: .5rem; align-items: baseline; }
+  .friend-section ul { max-height: 22rem; overflow-y: auto; margin-top: .4rem; }
+  .friend-book { display: flex; justify-content: space-between; align-items: baseline; gap: .75rem; padding: .3rem 0; font-size: .875rem; }
+  .friend-book .link-btn { white-space: nowrap; }
+
   @media (max-width: 1023px) {
     #filters { display: none; }
     #filters.show { display: block; }
@@ -172,14 +191,14 @@
     .card:hover, .star:hover, .btn:active { transform: none; }
   }
 </style>
-<style>*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.visible{visibility:visible}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.mx-auto{margin-left:auto;margin-right:auto}.-mt-1{margin-top:-.25rem}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-3{margin-bottom:.75rem}.ml-auto{margin-left:auto}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-auto{margin-top:auto}.block{display:block}.inline{display:inline}.flex{display:flex}.grid{display:grid}.hidden{display:none}.min-h-screen{min-height:100vh}.w-full{width:100%}.min-w-0{min-width:0}.max-w-\[1500px\]{max-width:1500px}.flex-1{flex:1 1 0%}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.resize{resize:both}.list-decimal{list-style-type:decimal}.list-disc{list-style-type:disc}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-\[1fr_auto\]{grid-template-columns:1fr auto}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.items-baseline{align-items:baseline}.justify-end{justify-content:flex-end}.justify-between{justify-content:space-between}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-5{gap:1.25rem}.gap-x-2{-moz-column-gap:.5rem;column-gap:.5rem}.gap-x-3{-moz-column-gap:.75rem;column-gap:.75rem}.gap-x-6{-moz-column-gap:1.5rem;column-gap:1.5rem}.gap-y-1{row-gap:.25rem}.gap-y-2{row-gap:.5rem}.gap-y-2\.5{row-gap:.625rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.whitespace-nowrap{white-space:nowrap}.border{border-width:1px}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-8{padding:2rem}.px-4{padding-left:1rem;padding-right:1rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.pb-10{padding-bottom:2.5rem}.pb-4{padding-bottom:1rem}.pb-8{padding-bottom:2rem}.pl-5{padding-left:1.25rem}.pt-1{padding-top:.25rem}.pt-2{padding-top:.5rem}.pt-6{padding-top:1.5rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.tabular-nums{--tw-numeric-spacing:tabular-nums;font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)}.leading-relaxed{line-height:1.625}.leading-tight{line-height:1.25}.tracking-tight{letter-spacing:-.025em}.underline{text-decoration-line:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.outline{outline-style:solid}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}@media (min-width:640px){.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}}@media (min-width:768px){.md\:block{display:block}.md\:grid-cols-\[minmax\(0\2c 1fr\)_minmax\(0\2c 2fr\)\]{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}}@media (min-width:1024px){.lg\:sticky{position:sticky}.lg\:top-4{top:1rem}.lg\:hidden{display:none}.lg\:max-h-\[calc\(100vh-2rem\)\]{max-height:calc(100vh - 2rem)}.lg\:grid-cols-\[290px_minmax\(0\2c 1fr\)\]{grid-template-columns:290px minmax(0,1fr)}.lg\:overflow-y-auto{overflow-y:auto}}@media (min-width:1280px){.xl\:grid-cols-\[minmax\(0\2c 1\.25fr\)_minmax\(0\2c 1fr\)\]{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}}@media (min-width:1536px){.\32xl\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}</style>
+<style>*,:after,:before{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }::backdrop{--tw-border-spacing-x:0;--tw-border-spacing-y:0;--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;--tw-pan-x: ;--tw-pan-y: ;--tw-pinch-zoom: ;--tw-scroll-snap-strictness:proximity;--tw-gradient-from-position: ;--tw-gradient-via-position: ;--tw-gradient-to-position: ;--tw-ordinal: ;--tw-slashed-zero: ;--tw-numeric-figure: ;--tw-numeric-spacing: ;--tw-numeric-fraction: ;--tw-ring-inset: ;--tw-ring-offset-width:0px;--tw-ring-offset-color:#fff;--tw-ring-color:rgba(59,130,246,.5);--tw-ring-offset-shadow:0 0 #0000;--tw-ring-shadow:0 0 #0000;--tw-shadow:0 0 #0000;--tw-shadow-colored:0 0 #0000;--tw-blur: ;--tw-brightness: ;--tw-contrast: ;--tw-grayscale: ;--tw-hue-rotate: ;--tw-invert: ;--tw-saturate: ;--tw-sepia: ;--tw-drop-shadow: ;--tw-backdrop-blur: ;--tw-backdrop-brightness: ;--tw-backdrop-contrast: ;--tw-backdrop-grayscale: ;--tw-backdrop-hue-rotate: ;--tw-backdrop-invert: ;--tw-backdrop-opacity: ;--tw-backdrop-saturate: ;--tw-backdrop-sepia: ;--tw-contain-size: ;--tw-contain-layout: ;--tw-contain-paint: ;--tw-contain-style: }/*! tailwindcss v3.4.16 | MIT License | https://tailwindcss.com*/*,:after,:before{box-sizing:border-box;border:0 solid #e5e7eb}:after,:before{--tw-content:""}:host,html{line-height:1.5;-webkit-text-size-adjust:100%;-moz-tab-size:4;-o-tab-size:4;tab-size:4;font-family:ui-sans-serif,system-ui,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;font-feature-settings:normal;font-variation-settings:normal;-webkit-tap-highlight-color:transparent}body{margin:0;line-height:inherit}hr{height:0;color:inherit;border-top-width:1px}abbr:where([title]){-webkit-text-decoration:underline dotted;text-decoration:underline dotted}h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight:inherit}a{color:inherit;text-decoration:inherit}b,strong{font-weight:bolder}code,kbd,pre,samp{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,Liberation Mono,Courier New,monospace;font-feature-settings:normal;font-variation-settings:normal;font-size:1em}small{font-size:80%}sub,sup{font-size:75%;line-height:0;position:relative;vertical-align:baseline}sub{bottom:-.25em}sup{top:-.5em}table{text-indent:0;border-color:inherit;border-collapse:collapse}button,input,optgroup,select,textarea{font-family:inherit;font-feature-settings:inherit;font-variation-settings:inherit;font-size:100%;font-weight:inherit;line-height:inherit;letter-spacing:inherit;color:inherit;margin:0;padding:0}button,select{text-transform:none}button,input:where([type=button]),input:where([type=reset]),input:where([type=submit]){-webkit-appearance:button;background-color:transparent;background-image:none}:-moz-focusring{outline:auto}:-moz-ui-invalid{box-shadow:none}progress{vertical-align:baseline}::-webkit-inner-spin-button,::-webkit-outer-spin-button{height:auto}[type=search]{-webkit-appearance:textfield;outline-offset:-2px}::-webkit-search-decoration{-webkit-appearance:none}::-webkit-file-upload-button{-webkit-appearance:button;font:inherit}summary{display:list-item}blockquote,dd,dl,figure,h1,h2,h3,h4,h5,h6,hr,p,pre{margin:0}fieldset{margin:0}fieldset,legend{padding:0}menu,ol,ul{list-style:none;margin:0;padding:0}dialog{padding:0}textarea{resize:vertical}input::-moz-placeholder,textarea::-moz-placeholder{opacity:1;color:#9ca3af}input::placeholder,textarea::placeholder{opacity:1;color:#9ca3af}[role=button],button{cursor:pointer}:disabled{cursor:default}audio,canvas,embed,iframe,img,object,svg,video{display:block;vertical-align:middle}img,video{max-width:100%;height:auto}[hidden]:where(:not([hidden=until-found])){display:none}.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border-width:0}.visible{visibility:visible}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.mx-auto{margin-left:auto;margin-right:auto}.-mt-1{margin-top:-.25rem}.mb-1{margin-bottom:.25rem}.mb-1\.5{margin-bottom:.375rem}.mb-3{margin-bottom:.75rem}.ml-auto{margin-left:auto}.mt-0\.5{margin-top:.125rem}.mt-1{margin-top:.25rem}.mt-1\.5{margin-top:.375rem}.mt-2{margin-top:.5rem}.mt-3{margin-top:.75rem}.mt-4{margin-top:1rem}.mt-auto{margin-top:auto}.block{display:block}.inline{display:inline}.flex{display:flex}.grid{display:grid}.hidden{display:none}.min-h-screen{min-height:100vh}.w-full{width:100%}.min-w-0{min-width:0}.max-w-\[1200px\]{max-width:1200px}.max-w-\[1500px\]{max-width:1500px}.flex-1{flex:1 1 0%}.transform{transform:translate(var(--tw-translate-x),var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.resize{resize:both}.list-decimal{list-style-type:decimal}.list-disc{list-style-type:disc}.grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.grid-cols-\[1fr_auto\]{grid-template-columns:1fr auto}.flex-col{flex-direction:column}.flex-wrap{flex-wrap:wrap}.items-start{align-items:flex-start}.items-end{align-items:flex-end}.items-center{align-items:center}.items-baseline{align-items:baseline}.justify-end{justify-content:flex-end}.justify-between{justify-content:space-between}.gap-1\.5{gap:.375rem}.gap-2{gap:.5rem}.gap-3{gap:.75rem}.gap-5{gap:1.25rem}.gap-x-2{-moz-column-gap:.5rem;column-gap:.5rem}.gap-x-3{-moz-column-gap:.75rem;column-gap:.75rem}.gap-x-6{-moz-column-gap:1.5rem;column-gap:1.5rem}.gap-y-1{row-gap:.25rem}.gap-y-2{row-gap:.5rem}.gap-y-2\.5{row-gap:.625rem}.space-y-1>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.25rem*var(--tw-space-y-reverse))}.space-y-2>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.5rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.5rem*var(--tw-space-y-reverse))}.space-y-3>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(.75rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(.75rem*var(--tw-space-y-reverse))}.space-y-5>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(1.25rem*(1 - var(--tw-space-y-reverse)));margin-bottom:calc(1.25rem*var(--tw-space-y-reverse))}.whitespace-nowrap{white-space:nowrap}.border{border-width:1px}.p-4{padding:1rem}.p-5{padding:1.25rem}.p-8{padding:2rem}.px-4{padding-left:1rem;padding-right:1rem}.py-2{padding-top:.5rem;padding-bottom:.5rem}.pb-10{padding-bottom:2.5rem}.pb-4{padding-bottom:1rem}.pb-8{padding-bottom:2rem}.pl-5{padding-left:1.25rem}.pt-1{padding-top:.25rem}.pt-2{padding-top:.5rem}.pt-3{padding-top:.75rem}.pt-6{padding-top:1.5rem}.text-center{text-align:center}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2.25rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-sm{font-size:.875rem;line-height:1.25rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-xs{font-size:.75rem;line-height:1rem}.font-semibold{font-weight:600}.uppercase{text-transform:uppercase}.tabular-nums{--tw-numeric-spacing:tabular-nums;font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)}.leading-relaxed{line-height:1.625}.leading-tight{line-height:1.25}.tracking-tight{letter-spacing:-.025em}.underline{text-decoration-line:underline}.antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.outline{outline-style:solid}.filter{filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.transition{transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:color,background-color,border-color,text-decoration-color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-filter;transition-timing-function:cubic-bezier(.4,0,.2,1);transition-duration:.15s}@media (min-width:640px){.sm\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.sm\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.sm\:px-6{padding-left:1.5rem;padding-right:1.5rem}.sm\:text-3xl{font-size:1.875rem;line-height:2.25rem}.sm\:text-4xl{font-size:2.25rem;line-height:2.5rem}}@media (min-width:768px){.md\:block{display:block}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-\[minmax\(0\2c 1fr\)_minmax\(0\2c 2fr\)\]{grid-template-columns:minmax(0,1fr) minmax(0,2fr)}}@media (min-width:1024px){.lg\:sticky{position:sticky}.lg\:top-4{top:1rem}.lg\:hidden{display:none}.lg\:max-h-\[calc\(100vh-2rem\)\]{max-height:calc(100vh - 2rem)}.lg\:grid-cols-\[290px_minmax\(0\2c 1fr\)\]{grid-template-columns:290px minmax(0,1fr)}.lg\:overflow-y-auto{overflow-y:auto}}@media (min-width:1280px){.xl\:grid-cols-\[minmax\(0\2c 1\.25fr\)_minmax\(0\2c 1fr\)\]{grid-template-columns:minmax(0,1.25fr) minmax(0,1fr)}}@media (min-width:1536px){.\32xl\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}}</style>
 </head>
 <body class="min-h-screen antialiased">
 
 <div id="banner" class="hidden px-4 py-2 text-sm text-center" style="background:var(--gold-soft);color:var(--ink)" role="status"></div>
 
 <header class="max-w-[1500px] mx-auto px-4 sm:px-6 pt-6 pb-4 flex flex-wrap items-end justify-between gap-3">
-  <div>
+  <div style="flex:1 1 300px;min-width:0">
     <h1 class="serif text-3xl sm:text-4xl font-semibold tracking-tight">The Scratch Shelf</h1>
     <p class="muted text-sm mt-1"><span id="edition-note"></span></p>
   </div>
@@ -187,6 +206,7 @@
     <div class="seg" role="group" aria-label="View">
       <button id="view-poster" type="button">Poster</button>
       <button id="view-list" type="button">List</button>
+      <button id="view-friends" type="button">Friends</button>
     </div>
     <button id="export-btn" class="btn" type="button">Export</button>
     <button id="import-btn" class="btn" type="button">Import</button>
@@ -210,6 +230,34 @@
   </div>
   <div id="poster-scroll" class="px-4 sm:px-6"><div id="poster" class="poster"></div></div>
   <p class="px-4 sm:px-6 mt-3 text-xs faint">Oldest at the top left, newest at the bottom right. Cover images from Open Library; editions vary. Books without an image get a plain cloth cover. Based on the list in 1001 Books You Must Read Before You Die, edited by Peter Boxall (2018 edition). The Scratch Shelf is an unofficial fan project, not affiliated with the book, its publisher, Goodreads or Open Library. Your progress stays in this browser; use Export to keep a backup.</p>
+</section>
+
+<section id="friends-view" class="hidden max-w-[1200px] mx-auto px-4 sm:px-6 pb-10 space-y-5" aria-label="Friends">
+  <div class="grid gap-5 md:grid-cols-2 items-start">
+    <div class="panel p-5">
+      <h2 class="serif text-xl font-semibold">Share your shelf</h2>
+      <label for="my-name" class="eyebrow block mt-3 mb-1.5">Your name</label>
+      <input id="my-name" class="field" maxlength="30" autocomplete="off" placeholder="What friends will see">
+      <div class="flex flex-wrap gap-2 mt-3">
+        <button id="share-copy" class="btn btn-primary" type="button">Copy my link</button>
+        <button id="share-native" class="btn hidden" type="button">Share…</button>
+      </div>
+      <input id="share-link" class="field mt-2 hidden" readonly aria-label="Your share link">
+      <p class="text-xs faint mt-2">Your link shows your name and which books you’ve read. Ratings, notes and dates stay private. Anyone with the link can see it. It’s a snapshot, so send a fresh link when you want friends to see your latest.</p>
+    </div>
+    <div class="panel p-5">
+      <h2 class="serif text-xl font-semibold">Add a friend</h2>
+      <label for="friend-paste" class="eyebrow block mt-3 mb-1.5">Their link</label>
+      <textarea id="friend-paste" class="field" rows="2" placeholder="Paste the link they sent you"></textarea>
+      <button id="friend-add" class="btn btn-primary mt-3" type="button">Add friend</button>
+      <p class="text-xs faint mt-2">Tapping a friend’s link works too. If you use the home screen icon on an iPhone, paste the link here so it’s saved in the app.</p>
+    </div>
+  </div>
+  <div class="panel p-5">
+    <h2 class="serif text-xl font-semibold">Who’s read the most</h2>
+    <div id="friends-list" class="mt-1"></div>
+  </div>
+  <div id="friend-compare" class="panel p-5 hidden"></div>
 </section>
 
 <div id="list-view" class="max-w-[1500px] mx-auto px-4 sm:px-6 pb-10 grid gap-5 lg:grid-cols-[290px_minmax(0,1fr)] items-start">
@@ -1854,7 +1902,7 @@ function exportData() {
   flushNotes();
   const books = {};
   for (const id of Object.keys(tracked)) books[id] = Object.assign({ title: BOOK_BY_ID.get(id).title }, tracked[id]);
-  const payload = { app: EXPORT_APP, version: EXPORT_VERSION, exportedAt: new Date().toISOString(), books };
+  const payload = { app: EXPORT_APP, version: EXPORT_VERSION, exportedAt: new Date().toISOString(), books, social };
   const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' }));
   const a = document.createElement('a');
   a.href = url;
@@ -1879,6 +1927,18 @@ function commitImport(books, message) {
   toast(message || 'Backup imported');
 }
 
+// Friends from a backup join the current list; the newest update of each friend wins.
+function mergeSocial(incoming) {
+  if (!incoming) return;
+  if (incoming.me.id) social.me.id = incoming.me.id;
+  if (incoming.me.name) social.me.name = incoming.me.name;
+  Object.keys(incoming.friends).forEach(id => {
+    if (id !== social.me.id && (!social.friends[id] || social.friends[id].day <= incoming.friends[id].day)) social.friends[id] = incoming.friends[id];
+  });
+  saveSocial();
+  renderFriends();
+}
+
 function handleImportText(text) {
   if (!text.trim()) return importFailed(['The file is empty.']);
   let parsed;
@@ -1886,13 +1946,15 @@ function handleImportText(text) {
   catch (e) { return importFailed(['This file is not valid JSON, so it may be damaged or not a tracker backup.']); }
   const result = validateImport(parsed);
   if (result.errors.length) return importFailed(result.errors);
+  const socialResult = parsed.social === undefined ? { errors: [] } : validateSocial(parsed.social);
+  if (socialResult.errors.length) return importFailed(socialResult.errors);
 
   const incoming = Object.values(result.books);
   const readCount = incoming.filter(e => e.status === 'read').length;
   showModal('Replace your current data?',
     '<p>This backup has <strong>' + incoming.length + '</strong> tracked ' + (incoming.length === 1 ? 'book' : 'books') + ', including <strong>' + readCount + '</strong> read.</p>' +
     '<p>It will replace the <strong>' + Object.keys(tracked).length + '</strong> books you are tracking now.</p>',
-    [{ label: 'Cancel' }, { label: 'Replace', primary: true, run: () => commitImport(result.books) }]);
+    [{ label: 'Cancel' }, { label: 'Replace', primary: true, run: () => { commitImport(result.books); mergeSocial(socialResult.social); } }]);
 }
 
 function wireImport() {
@@ -2226,7 +2288,11 @@ function renderPlaque(read, eraRead, eraTotal) {
 }
 
 function measurePoster() {
-  const poster = $('poster');
+  measurePosterEl($('poster'));
+  if ($('friend-poster')) measurePosterEl($('friend-poster'));
+}
+
+function measurePosterEl(poster) {
   const width = poster.clientWidth;
   if (!width) return;
   // cols*w + 32 gaps (.09w) + padding (2*.9w)
@@ -2249,10 +2315,13 @@ function setView(view) {
   savePrefs();
   const poster = view === 'poster';
   $('poster-view').classList.toggle('hidden', !poster);
-  $('list-view').classList.toggle('hidden', poster);
+  $('list-view').classList.toggle('hidden', view !== 'list');
+  $('friends-view').classList.toggle('hidden', view !== 'friends');
   $('view-poster').setAttribute('aria-pressed', poster);
-  $('view-list').setAttribute('aria-pressed', !poster);
+  $('view-list').setAttribute('aria-pressed', view === 'list');
+  $('view-friends').setAttribute('aria-pressed', view === 'friends');
   if (poster) setZoom(prefs.zoom);
+  if (view === 'friends') renderFriends();
 }
 
 function applyPosterSearch(scroll) {
@@ -2567,6 +2636,332 @@ function wirePoster() {
   wireSheet();
 }
 
+/* ---------- Friends: share links, no accounts ---------- */
+
+const SITE_URL = 'https://kaimaster10.github.io/the-scratch-shelf/';
+const FRIENDS_KEY = 'books1001.friends';
+const LINK_VERSION = '1';
+const MAX_FRIENDS = 200;
+const BITS_LENGTH = Math.ceil(Math.ceil(BOOKS.length / 8) * 4 / 3);
+const ID_PATTERN = /^[a-z0-9]{8,16}$/;
+let social = { me: { id: '', name: '' }, friends: {} };
+let comparingId = null;
+let compareFilter = 'all';
+
+const toBase64URL = bytes => btoa(String.fromCharCode(...bytes)).replace(/\+/g, '-').replace(/\//g, '_').replace(/=+$/, '');
+function fromBase64URL(text) {
+  try {
+    const raw = atob(text.replace(/-/g, '+').replace(/_/g, '/'));
+    return Uint8Array.from(raw, c => c.charCodeAt(0));
+  } catch (e) { return null; }
+}
+const cleanName = name => String(name).replace(/[\u0000-\u001f\u007f‪-‮⁦-⁩]/g, '').trim().slice(0, 30);
+const todayNumber = () => Math.floor(Date.now() / 86400000);
+function linkChecksum(text) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < text.length; i++) { h ^= text.charCodeAt(i); h = Math.imul(h, 16777619); }
+  return (h >>> 0).toString(36);
+}
+
+// A friend's reading as a list of bits, one per book in list order.
+function bitsAreValid(bits) {
+  if (typeof bits !== 'string' || bits.length !== BITS_LENGTH || !/^[A-Za-z0-9_-]+$/.test(bits)) return false;
+  const bytes = fromBase64URL(bits);
+  if (!bytes || bytes.length !== Math.ceil(BOOKS.length / 8)) return false;
+  const spare = bytes.length * 8 - BOOKS.length;
+  return spare === 0 || (bytes[bytes.length - 1] >> (8 - spare)) === 0;
+}
+function bookIdsFromBits(bits) {
+  const bytes = fromBase64URL(bits);
+  const ids = new Set();
+  BOOKS.forEach((b, i) => { if (bytes[i >> 3] & (1 << (i & 7))) ids.add(b.id); });
+  return ids;
+}
+function myBits() {
+  const bytes = new Uint8Array(Math.ceil(BOOKS.length / 8));
+  BOOKS.forEach((b, i) => { if (statusOf(b.id) === 'read') bytes[i >> 3] |= 1 << (i & 7); });
+  return toBase64URL(bytes);
+}
+const myReadIds = () => new Set(BOOKS.filter(b => statusOf(b.id) === 'read').map(b => b.id));
+
+function friendProblem(id, f) {
+  if (!ID_PATTERN.test(id)) return 'has an invalid ID';
+  if (f === null || typeof f !== 'object' || Array.isArray(f)) return 'is not a valid record';
+  if (typeof f.name !== 'string' || !cleanName(f.name)) return 'has no name';
+  if (!bitsAreValid(f.bits)) return 'has damaged reading data';
+  if (!Number.isInteger(f.day) || f.day < 0 || f.day > 100000) return 'has an invalid date';
+  return null;
+}
+
+// Checks a friends section from storage or a backup. Returns errors, or the cleaned section.
+function validateSocial(data) {
+  if (data === null || typeof data !== 'object' || Array.isArray(data)) return { errors: ['The friends section of this file is not valid.'] };
+  const friends = {};
+  const source = data.friends === undefined ? {} : data.friends;
+  if (source === null || typeof source !== 'object' || Array.isArray(source)) return { errors: ['The friends section of this file is not valid.'] };
+  const ids = Object.keys(source);
+  if (ids.length > MAX_FRIENDS) return { errors: ['This file has more than ' + MAX_FRIENDS + ' friends.'] };
+  for (const id of ids) {
+    const problem = friendProblem(id, source[id]);
+    if (problem) return { errors: ['A saved friend ' + problem + '.'] };
+    friends[id] = { name: cleanName(source[id].name), bits: source[id].bits, day: source[id].day };
+  }
+  const me = data.me && typeof data.me === 'object' ? data.me : {};
+  return { errors: [], social: { me: { id: ID_PATTERN.test(me.id || '') ? me.id : '', name: cleanName(me.name || '') }, friends } };
+}
+
+function loadSocial() {
+  const raw = store.get(FRIENDS_KEY);
+  if (raw === null) return;
+  try {
+    const result = validateSocial(JSON.parse(raw));
+    if (result.errors.length) throw new Error(result.errors[0]);
+    social = result.social;
+  } catch (e) {
+    store.set(FRIENDS_KEY + '.damaged', raw);
+    notice('Your saved friends could not be read, so that list started fresh.');
+  }
+}
+function saveSocial() { store.set(FRIENDS_KEY, JSON.stringify(social)); }
+
+function myId() {
+  if (!social.me.id) {
+    const bytes = crypto.getRandomValues(new Uint8Array(10));
+    social.me.id = Array.from(bytes, b => (b % 36).toString(36)).join('').padEnd(10, '0');
+    saveSocial();
+  }
+  return social.me.id;
+}
+
+function buildShareLink() {
+  const name = toBase64URL(new TextEncoder().encode(cleanName(social.me.name)));
+  const body = [LINK_VERSION, myId(), name, myBits(), todayNumber().toString(36)].join('.');
+  return SITE_URL + '#friend=' + body + '.' + linkChecksum(body);
+}
+
+function parseFriendText(text) {
+  const damaged = { error: 'That link is incomplete or damaged. Ask your friend to send it again.' };
+  const match = String(text).match(/friend=([A-Za-z0-9_.-]+)/);
+  if (!match) return { error: 'That doesn’t look like a Scratch Shelf link. Copy the whole link and try again.' };
+  const parts = match[1].replace(/\.+$/, '').split('.');
+  if (parts[0] !== LINK_VERSION) return parts.length === 6 ? { error: 'That link was made by a newer version of The Scratch Shelf. Reload this page and try again.' } : damaged;
+  if (parts.length !== 6) return damaged;
+  const [, id, nameText, bits, dayText, check] = parts;
+  if (linkChecksum(parts.slice(0, 5).join('.')) !== check) return damaged;
+  const nameBytes = fromBase64URL(nameText);
+  let name = '';
+  try { name = cleanName(new TextDecoder('utf-8', { fatal: true }).decode(nameBytes)); } catch (e) { return damaged; }
+  const day = parseInt(dayText, 36);
+  const friend = { name, bits, day };
+  if (friendProblem(id, friend)) return damaged;
+  return { id, friend };
+}
+
+function offerFriend(text) {
+  const parsed = parseFriendText(text);
+  if (parsed.error) {
+    showModal('Couldn’t add that friend', '<p>' + esc(parsed.error) + '</p><p style="color:var(--ink)"><strong>Nothing was changed.</strong></p>', [{ label: 'OK', primary: true }]);
+    return false;
+  }
+  if (parsed.id === social.me.id) {
+    showModal('This is your own link', '<p>Send it to a friend, and ask them to send you theirs.</p>', [{ label: 'OK', primary: true }]);
+    return false;
+  }
+  const existing = social.friends[parsed.id];
+  if (existing && existing.day > parsed.friend.day) {
+    showModal('You already have a newer update', '<p>This link from ' + esc(parsed.friend.name) + ' is older than the one you saved, so nothing was changed.</p>', [{ label: 'OK', primary: true }]);
+    return false;
+  }
+  if (!existing && Object.keys(social.friends).length >= MAX_FRIENDS) {
+    showModal('Your friends list is full', '<p>Remove someone before adding another friend.</p>', [{ label: 'OK', primary: true }]);
+    return false;
+  }
+  const read = bookIdsFromBits(parsed.friend.bits).size;
+  showModal(existing ? 'Update ' + parsed.friend.name + '?' : 'Add ' + parsed.friend.name + '?',
+    '<p><strong>' + esc(parsed.friend.name) + '</strong> has read <strong>' + fmt(read) + '</strong> of the ' + fmt(TOTAL_ON_LIST) + ' books. ' + (existing ? 'This replaces their earlier update.' : 'They’ll appear in your Friends tab.') + '</p>',
+    [{ label: 'Not now' }, {
+      label: existing ? 'Update' : 'Add friend', primary: true, run: () => {
+        social.friends[parsed.id] = parsed.friend;
+        saveSocial();
+        comparingId = parsed.id;
+        compareFilter = 'all';
+        $('friend-paste').value = '';
+        setView('friends');
+        toast(parsed.friend.name + (existing ? ' updated' : ' added'));
+      },
+    }]);
+  return true;
+}
+
+function handleFriendHash() {
+  if (!location.hash.includes('friend=')) return;
+  const text = location.hash;
+  try { history.replaceState(null, '', location.pathname + location.search); } catch (e) {}
+  offerFriend(text);
+}
+
+function updatedText(day) {
+  const ago = todayNumber() - day;
+  return ago <= 0 ? 'Updated today' : ago === 1 ? 'Updated yesterday' : 'Updated ' + fmt(ago) + ' days ago';
+}
+
+function friendRow(label, read, detail, actions, isMe) {
+  const pct = (read / TOTAL_ON_LIST) * 100;
+  return '<div class="friend-row' + (isMe ? ' is-me' : '') + '">' +
+    '<div class="min-w-0"><div class="flex flex-wrap items-baseline gap-x-2"><span class="serif text-lg font-semibold">' + esc(label) + '</span>' +
+    '<span class="text-sm muted tabular-nums">' + fmt(read) + ' / ' + fmt(TOTAL_ON_LIST) + ' · ' + pct.toFixed(1) + '%</span></div>' +
+    '<div class="bar-track mt-1.5"><div class="bar-fill" style="width:' + pct + '%"></div></div>' +
+    '<p class="text-xs faint mt-1.5">' + detail + '</p></div>' +
+    '<div class="flex gap-2 items-center">' + actions + '</div></div>';
+}
+
+function renderFriends() {
+  if (!$('friends-list')) return;
+  if ($('my-name') !== document.activeElement) $('my-name').value = social.me.name;
+  const mine = myReadIds();
+  const entries = Object.keys(social.friends).map(id => {
+    const theirs = bookIdsFromBits(social.friends[id].bits);
+    let common = 0;
+    theirs.forEach(b => { if (mine.has(b)) common++; });
+    return { id, friend: social.friends[id], read: theirs.size, common };
+  });
+  const rows = entries.map(e => ({
+    read: e.read,
+    html: friendRow(e.friend.name, e.read,
+      fmt(e.common) + ' in common · ' + updatedText(e.friend.day),
+      '<button type="button" class="btn" data-compare="' + e.id + '">Compare</button>' +
+      '<button type="button" class="link-btn" data-remove="' + e.id + '" aria-label="Remove ' + esc(e.friend.name) + '">Remove</button>', false),
+  }));
+  rows.push({ read: mine.size, me: true, html: friendRow(social.me.name || 'You', mine.size, 'This is you', '', true) });
+  rows.sort((a, b) => b.read - a.read || (a.me ? -1 : 1));
+  $('friends-list').innerHTML = rows.map(r => r.html).join('') +
+    (entries.length ? '' : '<p class="muted text-sm pt-3">No friends here yet. Copy your link, send it to a friend, and ask for theirs back.</p>');
+  renderCompare();
+}
+
+function renderCompare() {
+  const panel = $('friend-compare');
+  const friend = comparingId && social.friends[comparingId];
+  panel.classList.toggle('hidden', !friend);
+  if (!friend) { comparingId = null; return; }
+  const theirs = bookIdsFromBits(friend.bits);
+  const mine = myReadIds();
+  const byYear = POSTER_ORDER;
+  const both = byYear.filter(b => theirs.has(b.id) && mine.has(b.id));
+  const onlyThem = byYear.filter(b => theirs.has(b.id) && !mine.has(b.id));
+  const onlyYou = byYear.filter(b => !theirs.has(b.id) && mine.has(b.id));
+  const name = friend.name;
+
+  const tile = b => {
+    const read = theirs.has(b.id);
+    const group = read && mine.has(b.id) ? 'both' : read ? 'them' : mine.has(b.id) ? 'you' : 'none';
+    return '<div class="tile friend-tile ' + eraClass(b) + (read ? ' revealed' : '') + (group === 'both' ? ' also-mine' : '') + '" data-group="' + group + '" title="' + esc(b.title + ' by ' + b.author) + '">' + tileInner(b, read) + '</div>';
+  };
+  const listRow = (b, canWant) => '<li class="friend-book"><span class="min-w-0"><span class="serif">' + esc(b.title) + '</span> <span class="faint text-xs">' + esc(b.author) + ', ' + yearLabel(b.year) + '</span></span>' +
+    (canWant && statusOf(b.id) === 'not-started' ? '<button type="button" class="link-btn" data-want="' + b.id + '">Want to Read</button>' : '') + '</li>';
+  const section = (title, books, canWant) => '<details class="friend-section"><summary><span class="font-semibold">' + esc(title) + '</span> <span class="muted tabular-nums">' + fmt(books.length) + '</span></summary>' +
+    (books.length ? '<ul>' + books.map(b => listRow(b, canWant)).join('') + '</ul>' : '<p class="text-sm faint py-2">None yet.</p>') + '</details>';
+  const filterButton = (value, label) => '<button type="button" data-filter="' + value + '" aria-pressed="' + (compareFilter === value) + '">' + esc(label) + '</button>';
+
+  panel.innerHTML =
+    '<div class="flex flex-wrap items-baseline justify-between gap-2"><h2 class="serif text-2xl font-semibold">You and ' + esc(name) + '</h2>' +
+      '<span class="text-xs faint">' + updatedText(friend.day) + '</span></div>' +
+    '<dl class="grid grid-cols-3 gap-3 mt-3">' +
+      statTile('In common', fmt(both.length)) + statTile('Only ' + esc(name), fmt(onlyThem.length)) + statTile('Only you', fmt(onlyYou.length)) + '</dl>' +
+    '<div class="seg flex-wrap mt-4" role="group" aria-label="Highlight on poster">' +
+      filterButton('all', 'Everything') + filterButton('both', 'In common') + filterButton('them', 'Only ' + name) + filterButton('you', 'Only you') + '</div>' +
+    '<p class="text-xs faint mt-2">This is ' + esc(name) + '’s poster. A gold corner marks a book you’ve both read.</p>' +
+    '<div id="friend-poster" class="poster mt-2"><div class="plaque"><div class="plaque-num">' + fmt(theirs.size) + '</div>' +
+      '<div class="plaque-title">' + esc(name) + '’s shelf</div><div class="plaque-count">of ' + fmt(TOTAL_ON_LIST) + ' unveiled</div></div>' +
+      byYear.map(tile).join('') + '</div>' +
+    '<div class="mt-4">' +
+      section('Read by ' + name + ', not by you', onlyThem, true) +
+      section('Read by you both', both, false) +
+      section('Read by you, not by ' + name, onlyYou, false) +
+    '</div>';
+  measurePosterEl($('friend-poster'));
+  applyCompareFilter();
+}
+
+function applyCompareFilter() {
+  document.querySelectorAll('#friend-poster .friend-tile').forEach(t => t.classList.toggle('dim', compareFilter !== 'all' && t.dataset.group !== compareFilter));
+  document.querySelectorAll('#friend-compare [data-filter]').forEach(b => b.setAttribute('aria-pressed', b.dataset.filter === compareFilter));
+}
+
+async function copyShareLink() {
+  const name = cleanName($('my-name').value);
+  if (!name) {
+    $('my-name').focus();
+    toast('Add your name first so friends know it’s you');
+    return null;
+  }
+  social.me.name = name;
+  const link = buildShareLink();
+  saveSocial();
+  const box = $('share-link');
+  box.value = link;
+  box.classList.remove('hidden');
+  renderFriends();
+  return link;
+}
+
+function wireFriends() {
+  $('view-friends').addEventListener('click', () => setView('friends'));
+  $('my-name').addEventListener('change', ev => { social.me.name = cleanName(ev.target.value); saveSocial(); renderFriends(); });
+  $('share-copy').addEventListener('click', () => {
+    const name = cleanName($('my-name').value);
+    if (!name) { copyShareLink(); return; }
+    social.me.name = name;
+    const link = buildShareLink();
+    copyShareLink();
+    const copied = navigator.clipboard ? navigator.clipboard.writeText(link) : Promise.reject();
+    copied.then(() => toast('Link copied. Send it to a friend.'), () => { $('share-link').select(); toast('Press copy on the highlighted link'); });
+  });
+  if (navigator.share) {
+    $('share-native').classList.remove('hidden');
+    $('share-native').addEventListener('click', () => {
+      const name = cleanName($('my-name').value);
+      if (!name) { copyShareLink(); return; }
+      social.me.name = name;
+      const url = buildShareLink();
+      copyShareLink();
+      navigator.share({ title: 'The Scratch Shelf', text: 'Compare our reading on The Scratch Shelf', url }).catch(() => {});
+    });
+  }
+  $('friend-add').addEventListener('click', () => {
+    if (!$('friend-paste').value.trim()) { $('friend-paste').focus(); return; }
+    offerFriend($('friend-paste').value);
+  });
+  $('friends-list').addEventListener('click', ev => {
+    const compare = ev.target.closest('[data-compare]');
+    const remove = ev.target.closest('[data-remove]');
+    if (compare) {
+      comparingId = compare.dataset.compare;
+      compareFilter = 'all';
+      renderCompare();
+      $('friend-compare').scrollIntoView({ block: 'start', behavior: reducedMotion() ? 'auto' : 'smooth' });
+    } else if (remove) {
+      const id = remove.dataset.remove;
+      const removed = social.friends[id];
+      delete social.friends[id];
+      if (comparingId === id) comparingId = null;
+      saveSocial();
+      renderFriends();
+      toast(removed.name + ' removed', { label: 'Undo', run: () => { social.friends[id] = removed; saveSocial(); renderFriends(); } });
+    }
+  });
+  $('friend-compare').addEventListener('click', ev => {
+    const filter = ev.target.closest('[data-filter]');
+    const want = ev.target.closest('[data-want]');
+    if (filter) { compareFilter = filter.dataset.filter; applyCompareFilter(); }
+    if (want) {
+      setStatus(want.dataset.want, 'want');
+      want.replaceWith(Object.assign(document.createElement('span'), { className: 'text-xs faint', textContent: 'Added' }));
+    }
+  });
+  window.addEventListener('hashchange', handleFriendHash);
+}
+
 /* ---------- Theme and wiring ---------- */
 
 function renderTheme() {
@@ -2578,6 +2973,7 @@ function renderTheme() {
 function renderAll() {
   renderPoster();
   renderDashboard();
+  if (prefs.view === 'friends') renderFriends();
   renderFilterCounts();
   applyView();
   pickNext($('next-era').value, $('next-genre').value);
@@ -2586,6 +2982,7 @@ function renderAll() {
 function init() {
   $('edition-note').textContent = 'Scratch off the books from 1001 Books You Must Read Before You Die (' + EDITION_LABEL + ') as you read them. An unofficial fan project.';
   loadTracked();
+  loadSocial();
   fillNextSelects();
   renderFilters();
   $('sort-field').value = ['title', 'author', 'year', 'status'].includes(prefs.sortField) ? prefs.sortField : 'title';
@@ -2598,8 +2995,10 @@ function init() {
   wireImport();
   wireGoodreads();
   wirePoster();
+  wireFriends();
   renderAll();
-  setView(prefs.view === 'list' ? 'list' : 'poster');
+  setView(['list', 'friends'].includes(prefs.view) ? prefs.view : 'poster');
+  handleFriendHash();
   window.addEventListener('pagehide', () => { if (notesTimer) flushNotes(); });
   window.addEventListener('beforeunload', () => { if (notesTimer) flushNotes(); });
   if (!store.works()) notice('This browser is blocking saved data, so changes will be lost when you close the page. Use Export to keep a copy.');

@@ -1,0 +1,14 @@
+{
+  "name": "The Scratch Shelf",
+  "short_name": "Scratch Shelf",
+  "description": "A scratch-off poster of 1,001 great books.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#1b1410",
+  "theme_color": "#1b1410",
+  "icons": [
+    { "src": "icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+  ]
+}
